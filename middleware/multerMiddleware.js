@@ -9,5 +9,13 @@ const fileStorage = multer.diskStorage({
   },
 });
 
-exports.upload = multer({ storage: fileStorage });
+const filter = (req, file, cb) => {
+  // Allowing only jpeg and png files
+  if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
+    cb(null, true);
+  } else {
+    cb(new Error("Invalid file type"), false);
+  }
+};
 
+exports.upload = multer({ storage: fileStorage, fileFilter: filter });
