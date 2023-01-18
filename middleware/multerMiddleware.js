@@ -5,17 +5,22 @@ const fileStorage = multer.diskStorage({
     cb(null, "images/");
   },
   filename: (req, file, cb) => {
-    cb(null, file.fieldname + "--" + Date.now());
+    cb(null, file.originalname);
   },
 });
 
-const filter = (req, file, cb) => {
-  // Allowing only jpeg and png files
-  if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype.split("/")[0] === "image") {
     cb(null, true);
   } else {
-    cb(new Error("Invalid file type"), false);
+    cb(new Error("Please add an image file type"), false);
   }
 };
 
-exports.upload = multer({ storage: fileStorage, fileFilter: filter });
+exports.upload = multer({
+  storage: fileStorage,
+  limits: {
+    fileSize: 1024 * 1024 * 20,
+  },
+  fileFilter: fileFilter,
+});

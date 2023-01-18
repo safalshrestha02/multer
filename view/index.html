@@ -4,12 +4,29 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Multer file uoload</title>
+    <title>Multer file upload</title>
   </head>
   <body>
     <form action="/upload" method="POST" enctype="multipart/form-data">
       <input type="file" name="myFiles" accept="image/*" multiple />
       <button>Submit</button>
     </form>
+    <img id="image" />
   </body>
+
+  <script>
+    // const img = document.getElementById("image");
+    // img.src = "/uploads/" + req.file.originalname;
+    // document.body.appendChild(img);
+
+    // fetch("/files")
+    //   .then((response) => response.json())
+    //   .then((files) => {
+    //     files.forEach((file) => {
+    //       const img = document.getElementById("image");
+    //       img.src = `/uploads/${file}`;
+    //       document.body.appendChild(img);
+    //     });
+    //   });
+  </script>
 </html>
